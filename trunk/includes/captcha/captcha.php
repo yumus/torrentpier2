@@ -24,14 +24,13 @@ class captcha_common
 	var $new_cap_sid    = '';
 	var $new_code_key   = '';
 	var $new_cap_code   = '';
-	var $new_img_url    = '';
 	var $new_img_path   = '';
 	var $new_img_bin    = '';
 
 	function captcha_common ($cfg)
 	{
 		$this->cfg           = $cfg;
-		$this->can_bypass    = !empty($_POST[$this->cfg['off_key']]);
+		$this->can_bypass    = !empty($_POST[$this->cfg['secret_key']]);
 		$this->curr_code_key = $this->get_key_name(TIMENOW);
 		$this->prev_code_key = $this->get_key_name(TIMENOW - $this->key_ttl);
 	}
@@ -41,7 +40,7 @@ class captcha_common
 		// обход
 		if ($this->can_bypass || $this->cfg['disabled'])
 		{
-			if (!empty($_POST[$this->cfg['off_key']])) log_get('cap/off', @$_POST['login_username']);
+			if (!empty($_POST[$this->cfg['secret_key']])) log_get('cap/off', @$_POST['login_username']);
 			return true;
 		}
 		// cap_sid
@@ -51,7 +50,6 @@ class captcha_common
 		}
 		else
 		{
-#			bb_log(join("\t", array(date('H:i:s'), CLIENT_IP, @$_POST['login_username'], @$_POST['login_password'], "\n")), 'cap/sid_key-empty-'.date('m-d'));
 			return false;
 		}
 		// code
@@ -64,24 +62,18 @@ class captcha_common
 		{
 			$entered_code = (string) $_POST[$this->prev_code_key];
 		}
-		else
-		{
-#			bb_log(join("\t", array(date('H:i:s'), CLIENT_IP, str_compact(print_r($_POST, true)), "\n")), 'cap/code_key-empty-'.date('m-d'));
-		}
+
 		$entered_code = strtolower(trim($entered_code));
-#		$entered_code = substr($entered_code, 0, $this->cap_max_chars);
 
 		$valid_code = $this->get_code();
 
 		if ($entered_code === $valid_code)
 		{
-#			bb_log(' ', 'cap/code_OK-'.date('m-d'));
 			$this->del_sid();
 			return true;
 		}
 		else
 		{
-#			if ($entered_code != '') bb_log(join("\t", array(date('H:i:s'), CLIENT_IP, $valid_code, $entered_code, @$_POST['login_username'], "\n")), 'cap/code_err-'.date('m-d'));
 			$this->del_sid();
 			return false;
 		}
@@ -92,11 +84,11 @@ class captcha_common
 		if ($this->cfg['disabled']) return '';
 
 		$this->gen_cap_sid();
-		$this->new_img_url  = $this->get_img_url($this->new_cap_id);
+		$this->new_img_path  = $this->get_img_path($this->new_cap_id);
 		$this->new_code_key = $this->get_key_name(TIMENOW);
 
 		return '
-			<div><img src="'. $this->new_img_url .'?'. mt_rand() .'" width="120" height="72" alt="pic" /></div>
+			<div><img src="'. $this->new_img_path .'?'. mt_rand() .'" width="120" height="72" alt="pic" /></div>
 			<div>
 				<input type="hidden" name="'. $this->cap_sid_key .'" value="'. $this->new_cap_sid .'" />
 				<input type="text" name="'. $this->new_code_key .'" value="" size="25" class="bold" />
@@ -140,11 +132,6 @@ class captcha_common
 		CACHE('bb_cap_sid')->set('c_sid_'. $this->new_cap_sid, $this->new_cap_code, $this->key_ttl*2);
 	}
 
-	function get_img_url ($id)
-	{
-		return $this->get_path($id, $this->cfg['img_url']);
-	}
-
 	function get_img_path ($id)
 	{
 		return $this->get_path($id, $this->cfg['img_path']);
@@ -153,7 +140,7 @@ class captcha_common
 	function get_path ($id, $base)
 	{
 		$path = $base . ($id % 50) .'/'. $id .'.'. $this->img_ext;
-		return preg_replace("#/($id)(\.{$this->img_ext})\$#", '/'. md5($this->cfg['salt1'] . md5($id) . $this->cfg['salt2']) .'$2', $path);
+		return preg_replace("#/($id)(\.{$this->img_ext})\$#", '/'. md5($this->cfg['secret_key'] . md5($id)) .'$2', $path);
 	}
 
 	/**
@@ -161,7 +148,7 @@ class captcha_common
 	*/
 	function get_key_name ($tm)
 	{
-		return 'cap_code_'. md5($this->cfg['salt1'] . md5($tm - ($tm % $this->key_ttl)) . $this->cfg['salt2']);
+		return 'cap_code_'. md5($this->cfg['secret_key'] . md5($tm - ($tm % $this->key_ttl)));
 	}
 }
 

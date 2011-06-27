@@ -540,10 +540,7 @@ $bb_cfg['advert_html_path']            = $bb_cfg['html_path'] .'advert.html';  #
 
 
 // Captcha
-$bb_cfg['captcha']['name']     = 'torrentpier.me';
-$bb_cfg['captcha']['disabled'] = false;
-$bb_cfg['captcha']['off_key']  = 'secret_key';
-$bb_cfg['captcha']['salt1']    = 'secret_key';
-$bb_cfg['captcha']['salt2']    = 'secret_key';
-$bb_cfg['captcha']['img_path'] = "./images/captcha/";  # without '/'
-$bb_cfg['captcha']['img_url']  = "./images/captcha/";   # without '/'
+$bb_cfg['captcha']['name']       = 'torrentpier.me';
+$bb_cfg['captcha']['disabled']   = false;
+$bb_cfg['captcha']['secret_key'] = 'secret_key';
+$bb_cfg['captcha']['img_path']   = "./images/captcha/";  # without '/'

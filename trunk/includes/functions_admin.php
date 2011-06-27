@@ -884,7 +884,7 @@ function user_delete ($user_id, $delete_posts = false)
 	");
 
 	DB()->query("
-		DELETE btu, tr, ust
+		DELETE btu, tr
 		FROM ".      BB_BT_USERS        ." btu
 		LEFT JOIN ". BB_BT_TRACKER       ." tr  ON(tr.user_id = btu.user_id)
 		WHERE btu.user_id IN($user_csv)

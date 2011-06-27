@@ -143,6 +143,7 @@ else if( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 	// This code is heavily influenced by a similar routine
 	// in phpMyAdmin 2.2.0
 	//
+	/*
 	if( preg_match("/^mysql/", SQL_LAYER) )
 	{
 		$sql = "SELECT VERSION() AS mysql_version";
@@ -197,6 +198,8 @@ else if( isset($_GET['pane']) && $_GET['pane'] == 'right' )
 	{
 		$dbsize = $lang['NOT_AVAILABLE'];
 	}
+	*/
+	$dbsize = $lang['NOT_AVAILABLE'];
 
 	if ( is_integer($dbsize) )
 	{

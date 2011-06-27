@@ -135,7 +135,7 @@ class Template {
 	 */
 	function load_config($root, $edit_db)
 	{
-		global $bb_cfg, $phpbb_root_path;
+		global $bb_cfg;
 
 		$this->cached_tpl_ext = $bb_cfg['xs_php'];
 		$this->use_cache = $bb_cfg['xs_use_cache'];
@@ -1234,7 +1234,7 @@ class Template {
 
 	function xs_startup()
 	{
-		global $bb_cfg, $phpbb_root_path;
+		global $bb_cfg;
 		if(empty($this->xs_started))
 		{	// adding predefined variables
 			$this->xs_started = 1;
@@ -1255,7 +1255,7 @@ class Template {
 			// can be used to make truly multi-lingual templates
 			$this->vars['LANG'] = isset($this->vars['LANG']) ? $this->vars['LANG'] : $bb_cfg['default_lang'];
 			// adding current template
-			$tpl = $this->root . '/'; // $phpbb_root_path . 'templates/' . $this->tpl . '/';
+			$tpl = $this->root . '/'; // BB_ROOT . 'templates/' . $this->tpl . '/';
 			if(substr($tpl, 0, 2) === './')
 			{
 				$tpl = substr($tpl, 2, strlen($tpl));

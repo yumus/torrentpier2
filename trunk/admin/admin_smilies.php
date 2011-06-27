@@ -31,13 +31,13 @@ $delimeter  = '=+:';
 //
 // Read a listing of uploaded smilies for use in the add or edit smliey code...
 //
-$dir = @opendir($phpbb_root_path . $bb_cfg['smilies_path']);
+$dir = @opendir(BB_ROOT . $bb_cfg['smilies_path']);
 
 while($file = @readdir($dir))
 {
-	if( !@is_dir(phpbb_realpath($phpbb_root_path . $bb_cfg['smilies_path'] . '/' . $file)) )
+	if( !@is_dir(phpbb_realpath(BB_ROOT . $bb_cfg['smilies_path'] . '/' . $file)) )
 	{
-		$img_size = @getimagesize($phpbb_root_path . $bb_cfg['smilies_path'] . '/' . $file);
+		$img_size = @getimagesize(BB_ROOT . $bb_cfg['smilies_path'] . '/' . $file);
 
 		if( $img_size[0] && $img_size[1] )
 		{
@@ -96,7 +96,7 @@ if( isset($_GET['import_pack']) || isset($_POST['import_pack']) )
 			}
 		}
 
-		$fcontents = @file($phpbb_root_path . $bb_cfg['smilies_path'] . '/'. $smile_pak);
+		$fcontents = @file(BB_ROOT . $bb_cfg['smilies_path'] . '/'. $smile_pak);
 
 		if( empty($fcontents) )
 		{
@@ -238,12 +238,12 @@ else if( isset($_POST['add']) || isset($_GET['add']) )
 		"L_SMILEY_EXPLAIN" => $lang['SMILE_DESC'],
 		"L_SMILEY_EMOTION" => $lang['SMILEY_EMOT'],
 
-		"SMILEY_IMG" => $phpbb_root_path . $bb_cfg['smilies_path'] . '/' . $smiley_images[0],
+		"SMILEY_IMG" => BB_ROOT . $bb_cfg['smilies_path'] . '/' . $smiley_images[0],
 
 		"S_SMILEY_ACTION" => append_sid("admin_smilies.php"),
 		"S_HIDDEN_FIELDS" => $s_hidden_fields,
 		"S_FILENAME_OPTIONS" => $filename_list,
-		"S_SMILEY_BASEDIR" => $phpbb_root_path . $bb_cfg['smilies_path'])
+		"S_SMILEY_BASEDIR" => BB_ROOT . $bb_cfg['smilies_path'])
 	);
 }
 else if ( $mode != "" )
@@ -316,12 +316,12 @@ else if ( $mode != "" )
 				"L_SMILEY_EXPLAIN" => $lang['SMILE_DESC'],
 				"L_SMILEY_EMOTION" => $lang['SMILEY_EMOT'],
 
-				"SMILEY_IMG" => $phpbb_root_path . $bb_cfg['smilies_path'] . '/' . $smiley_edit_img,
+				"SMILEY_IMG" => BB_ROOT . $bb_cfg['smilies_path'] . '/' . $smiley_edit_img,
 
 				"S_SMILEY_ACTION" => append_sid("admin_smilies.php"),
 				"S_HIDDEN_FIELDS" => $s_hidden_fields,
 				"S_FILENAME_OPTIONS" => $filename_list,
-				"S_SMILEY_BASEDIR" => $phpbb_root_path . $bb_cfg['smilies_path'])
+				"S_SMILEY_BASEDIR" => BB_ROOT . $bb_cfg['smilies_path'])
 			);
 
 			break;
@@ -461,7 +461,7 @@ else
 		$template->assign_block_vars("smiles", array(
 			"ROW_CLASS" => $row_class,
 
-			"SMILEY_IMG" =>  $phpbb_root_path . $bb_cfg['smilies_path'] . '/' . $smilies[$i]['smile_url'],
+			"SMILEY_IMG" =>  BB_ROOT . $bb_cfg['smilies_path'] . '/' . $smilies[$i]['smile_url'],
 			"CODE" => $smilies[$i]['code'],
 			"EMOT" => $smilies[$i]['emoticon'],
 

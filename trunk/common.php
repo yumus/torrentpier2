@@ -9,8 +9,6 @@ if (isset($_REQUEST['GLOBALS']) || isset($_FILES['GLOBALS'])) die();
 if (!defined('BB_ROOT')) define('BB_ROOT', './');
 if (!defined('IN_PHPBB') && !defined('IN_TRACKER')) define('IN_PHPBB', true);
 
-$phpbb_root_path = BB_ROOT;
-
 // Get initial config
 require(BB_ROOT .'config.php');
 require(BB_ROOT .'config_mods.php');

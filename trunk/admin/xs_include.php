@@ -41,11 +41,11 @@ define('XS_INCLUDED', true);
 
 if(!defined('XS_LANG_INCLUDED'))
 {
-	global $phpbb_root_path, $bb_cfg, $lang;
-	$xs_lang_file = $phpbb_root_path . 'language/lang_' . $bb_cfg['default_lang'] . '/lang_xs.php';
+	global $bb_cfg, $lang;
+	$xs_lang_file = LANG_ROOT_DIR ."lang_{$bb_cfg['default_lang']}/lang_xs.php";
 	if( !@file_exists($xs_lang_file) )
 	{	// load english version if there is no translation to current language
-		$xs_lang_file = $phpbb_root_path . 'language/lang_english/lang_xs.php';
+		$xs_lang_file = LANG_ROOT_DIR ."lang_english/lang_xs.php";
 	}
 	include($xs_lang_file);
 	define('XS_LANG_INCLUDED', true);

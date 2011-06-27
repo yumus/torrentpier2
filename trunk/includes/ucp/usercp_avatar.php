@@ -319,7 +319,6 @@ function user_avatar_upload($mode, $avatar_mode, &$current_avatar, &$current_typ
 function display_avatar_gallery($mode, $category, $user_id, $email, $current_email, $username, $email, $new_password, $cur_password, $password_confirm, $icq, $website, $location, $user_flag, $occupation, $interests, $signature, $viewemail, $notifypm, $notifyreply, $attachsig, $hideonline, $style, $language, $timezone, $dateformat, &$session_id)
 {
 	global $bb_cfg, $template, $lang, $images, $theme;
-	global $phpbb_root_path;
 
 	$dir = @opendir($bb_cfg['avatar_gallery_path']);
 

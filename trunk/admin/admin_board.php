@@ -34,7 +34,7 @@ else
 		if ($config_name == 'avatar_path')
 		{
 			$new['avatar_path'] = trim($new['avatar_path']);
-			if (strstr($new['avatar_path'], "\0") || !is_dir($phpbb_root_path . $new['avatar_path']) || !is_writable($phpbb_root_path . $new['avatar_path']))
+			if (strstr($new['avatar_path'], "\0") || !is_dir(BB_ROOT . $new['avatar_path']) || !is_writable(BB_ROOT . $new['avatar_path']))
 			{
 				$new['avatar_path'] = $default_config['avatar_path'];
 			}

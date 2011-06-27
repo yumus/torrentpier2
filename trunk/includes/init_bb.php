@@ -546,17 +546,6 @@ function make_url ($path)
 	return FULL_URL . preg_replace('#^\/?(.*?)\/?$#', '\1', $path);
 }
 
-// PHP5 with register_long_arrays off?
-if (PHP_VERSION >= 5 && !ini_get('register_long_arrays'))
-{
-	$HTTP_POST_VARS   = $_POST;
-	$HTTP_GET_VARS    = $_GET;
-	$HTTP_SERVER_VARS = $_SERVER;
-	$HTTP_COOKIE_VARS = $_COOKIE;
-	$HTTP_ENV_VARS    = $_ENV;
-	$HTTP_POST_FILES  = $_FILES;
-}
-
 if (STRIP_SLASHES)
 {
 	array_deep($_GET,     'stripslashes');

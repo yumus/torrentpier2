@@ -231,8 +231,8 @@ class report_privmsg extends report_module
 	//
 	function _subject_details_prepare(&$message, &$subject, $row)
 	{
-		global $phpbb_root_path, $bb_cfg, $userdata, $datastore;
-		include($phpbb_root_path . "includes/bbcode.php");
+		global $bb_cfg, $userdata, $datastore;
+		include(INC_DIR . "bbcode.php");
 
 		//
 		// If the board has HTML off but the post has HTML

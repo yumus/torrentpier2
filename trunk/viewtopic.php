@@ -508,7 +508,7 @@ else if (($t_data['topic_poster'] == $userdata['user_id']) && $userdata['session
 //
 // Get report topic module and create report link
 //
-require_once($phpbb_root_path . "includes/functions_report.php");
+require_once(INC_DIR ."functions_report.php");
 $report_topic = report_modules('name', 'report_topic');
 
 if ($report_topic && $report_topic->auth_check('auth_write'))
@@ -799,7 +799,7 @@ $prev_post_time = $max_post_time = 0;
 //
 // Get report post module
 //
-require_once($phpbb_root_path . "includes/functions_report.php");
+require_once(INC_DIR ."functions_report.php");
 $report_post = report_modules('name', 'report_post');
 // Report [END]
 

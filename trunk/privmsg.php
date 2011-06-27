@@ -405,7 +405,7 @@ if ( $mode == 'read' )
 	//
 	if ($folder == 'inbox')
 	{
-		include($phpbb_root_path . "includes/functions_report.php");
+		include(INC_DIR ."functions_report.php");
 		$report_privmsg = report_modules('name', 'report_privmsg');
 
 		if ($report_privmsg && $report_privmsg->auth_check('auth_write'))
@@ -1189,7 +1189,7 @@ else if ( $submit || $refresh || $mode != '' )
 				$server_protocol = ( $bb_cfg['cookie_secure'] ) ? 'https://' : 'http://';
 				$server_port = ( $bb_cfg['server_port'] <> 80 ) ? ':' . trim($bb_cfg['server_port']) . '/' : '/';
 
-				include($phpbb_root_path . 'includes/emailer.class.php');
+				include(INC_DIR .'emailer.class.php');
 				$emailer = new emailer($bb_cfg['smtp_delivery']);
 
 				$emailer->from($bb_cfg['board_email']);

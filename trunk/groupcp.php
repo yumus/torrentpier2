@@ -410,7 +410,7 @@ else
 
 					$group_name = $group_info['group_name'];
 
-					require($phpbb_root_path . 'includes/emailer.class.php');
+					require(INC_DIR .'emailer.class.php');
 					$emailer = new emailer($bb_cfg['smtp_delivery']);
 
 					$emailer->from($bb_cfg['board_email']);

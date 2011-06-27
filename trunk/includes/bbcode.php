@@ -181,7 +181,7 @@ function get_posts_text ($post_ids)
 // Either in a window or inline
 function generate_smilies($mode)
 {
-	global $bb_cfg, $template, $lang, $images, $phpbb_root_path;
+	global $bb_cfg, $template, $lang, $images;
 	global $user;
 
 	$inline_columns = 4;

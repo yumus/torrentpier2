@@ -60,19 +60,19 @@ function report_reason_counts_obtain()
 //
 function report_modules_inactive($mode = 'all', $module = null)
 {
-	global $phpbb_root_path, $bb_cfg;
+	global $bb_cfg;
 	static $modules;
 
 	if (!isset($modules))
 	{
 		if (!class_exists("report_module"))
-			include($phpbb_root_path . "includes/report_module.php");
+			include(INC_DIR . "report_module.php");
 
 		$installed_modules = report_modules('names');
 
 		$deny_modes = array('open', 'process', 'clear', 'delete', 'reported');
 
-		$dir = @opendir($phpbb_root_path . 'includes/report_hack');
+		$dir = @opendir(INC_DIR .'report_hack');
 
 		$modules = array();
 		$i = 0;
@@ -91,12 +91,12 @@ function report_modules_inactive($mode = 'all', $module = null)
 			}
 
 			// include module file
-			include($phpbb_root_path . "includes/report_hack/$file");
+			include(INC_DIR . "report_hack/$file");
 
 			// Include language file
 			$lang = array();
 
-			$lang_file = $phpbb_root_path . 'language/lang_' . $bb_cfg['default_lang'] . "/report_hack/lang_$module_name.php";
+            $lang_file = LANG_ROOT_DIR ."lang_{$bb_cfg['default_lang']}/report_hack/lang_$module_name.php";
 			if (file_exists($lang_file))
 			{
 				include($lang_file);

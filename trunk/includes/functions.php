@@ -2077,7 +2077,7 @@ function ajax_die ($msg_text, $msg_code = E_AJAX_GENERAL_ERROR)
 
 function message_die ($msg_code, $msg_text = '', $msg_title = '', $err_line = '', $err_file = '', $sql = '')
 {
-	global $DBS, $template, $bb_cfg, $theme, $lang, $phpbb_root_path, $nav_links, $gen_simple_header, $images;
+	global $DBS, $template, $bb_cfg, $theme, $lang, $nav_links, $gen_simple_header, $images;
 	global $userdata;
 
 	if (defined('HAS_DIED'))
@@ -2121,7 +2121,7 @@ function message_die ($msg_code, $msg_text = '', $msg_title = '', $err_line = ''
 	{
 		if (empty($template))
 		{
-			$template = new Template("{$phpbb_root_path}templates/{$bb_cfg['tpl_name']}");
+			$template = new Template(BB_ROOT ."templates/{$bb_cfg['tpl_name']}");
 		}
 		if (empty($theme))
 		{
@@ -2198,9 +2198,7 @@ function message_die ($msg_code, $msg_text = '', $msg_title = '', $err_line = ''
 // dougk_ff7 <October 5, 2002>
 function phpbb_realpath($path)
 {
-	global $phpbb_root_path;
-
-	return (!@function_exists('realpath') || !@realpath($phpbb_root_path . 'includes/functions.php')) ? $path : @realpath($path);
+	return (!@function_exists('realpath') || !@realpath(INC_DIR . 'functions.php')) ? $path : @realpath($path);
 }
 
 function login_redirect ($url = '')

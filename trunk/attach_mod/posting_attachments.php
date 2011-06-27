@@ -576,8 +576,7 @@ class attach_parent
 						//bt
 						if ($this->attachment_extension_list[$actual_element] === TORRENT_EXT && $attachments[$actual_element]['tracker_status'])
 						{
-							global $phpbb_root_path;
-							include($phpbb_root_path .'includes/functions_torrent.php');
+							include(INC_DIR .'functions_torrent.php');
 							tracker_unregister($attachment_id);
 						}
 						//bt end
@@ -774,7 +773,6 @@ class attach_parent
 	function display_attachment_bodies()
 	{
 		global $attach_config, $is_auth, $lang, $mode, $template, $upload_dir, $userdata, $forum_id;
-		global $phpbb_root_path;
 
 		// Choose what to display
 		$value_add = $value_posted = 0;
@@ -856,7 +854,7 @@ class attach_parent
 				}
 				else
 				{
-					$download_link = append_sid($phpbb_root_path . 'download.php?id=' . $this->attachment_id_list[$i]);
+					$download_link = append_sid(BB_ROOT . 'download.php?id=' . $this->attachment_id_list[$i]);
 				}
 
 				$template->assign_block_vars('attach_row', array(

@@ -66,7 +66,7 @@ if ( isset($_POST['submit']) )
 
 	if ( !$error )
 	{
-		include($phpbb_root_path . 'includes/emailer.class.php');
+		include(INC_DIR . 'emailer.class.php');
 
 		//
 		// Let's do some checking to make sure that mass mail functions

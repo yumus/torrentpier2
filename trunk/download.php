@@ -113,11 +113,11 @@ function send_file_to_browser($attachment, $upload_dir)
 	}
 
 	//bt
-	global $phpbb_root_path, $userdata;
+	global $userdata;
 
 	if (!(isset($_GET['original']) && !IS_USER))
 	{
-		include($phpbb_root_path .'includes/functions_torrent.php');
+		include(INC_DIR .'functions_torrent.php');
 		send_torrent_with_passkey($filename);
 	}
 	//bt end

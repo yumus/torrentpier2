@@ -102,13 +102,13 @@ function report_modules_obtain()
 //
 function report_modules($mode = 'all', $module = null)
 {
-	global $phpbb_root_path, $bb_cfg;
+	global $bb_cfg;
 	static $modules;
 	static $module_names;
 
 	if (!isset($modules))
 	{
-		include($phpbb_root_path . "includes/report_module.php");
+		include(INC_DIR . "report_module.php");
 
 		if (!$bb_cfg['report_modules_cache'] || !$rows = report_modules_cache_read())
 		{
@@ -125,12 +125,11 @@ function report_modules($mode = 'all', $module = null)
 		{
 			// Include module file
 			$row['report_module_name'] = basename($row['report_module_name']);
-			include($phpbb_root_path . 'includes/report_hack/' . $row['report_module_name'] . ".php");
+			include(INC_DIR .'report_hack/' . $row['report_module_name'] . ".php");
 
 			// Include language file
 			$lang = array();
-
-			$lang_file = $phpbb_root_path . 'language/lang_' . $bb_cfg['default_lang'] . '/report_hack/lang_' . $row['report_module_name'] . ".php";
+            $lang_file = LANG_ROOT_DIR ."lang_{$bb_cfg['default_lang']}/report_hack/lang_{$row['report_module_name']}.php";
 			if (file_exists($lang_file))
 			{
 				include($lang_file);
@@ -293,7 +292,7 @@ function reports_module_action($reports, $action_name, $action_params = array())
 //
 function report_notify($mode)
 {
-	global $phpbb_root_path, $userdata, $bb_cfg;
+	global $userdata, $bb_cfg;
 
 	$num_args = func_num_args();
 	$notify_users = $reports = array();
@@ -533,7 +532,7 @@ function report_notify($mode)
 		$bb_cfg['smtp_host'] = @$ini_val('SMTP');
 	}
 
-	include($phpbb_root_path . "includes/emailer.class.php");
+	include(INC_DIR . "emailer.class.php");
 	$emailer = new emailer($bb_cfg['smtp_delivery']);
 
 	$server_name = trim($bb_cfg['server_name']);
@@ -618,7 +617,7 @@ function report_notify($mode)
 //
 function &report_notify_lang($language)
 {
-	global $phpbb_root_path, $bb_cfg;
+	global $bb_cfg;
 	static $languages = array();
 	$language = $bb_cfg['default_lang'];
 
@@ -631,7 +630,7 @@ function &report_notify_lang($language)
 		else
 		{
 			$lang = array();
-			include($phpbb_root_path . 'language/lang_' . $language . "/lang_main.php");
+			include(LANG_ROOT_DIR ."lang_$language/lang_main.php");
 		}
 
 		$languages[$language] = $lang;

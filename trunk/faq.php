@@ -52,9 +52,8 @@ else
 	$lang_file = 'lang_faq';
 	$l_title = $lang['FAQ'];
 }
-include($phpbb_root_path . 'language/lang_' . $bb_cfg['default_lang'] . '/' . $lang_file . '.php');
-include("{$phpbb_root_path}language/lang_{$bb_cfg['default_lang']}/lang_faq_attach.php");
-
+include(LANG_ROOT_DIR ."lang_{$bb_cfg['default_lang']}/ $lang_file.php");
+include(LANG_ROOT_DIR ."lang_{$bb_cfg['default_lang']}/lang_faq_attach.php");
 
 //
 // Pull the array data from the lang pack

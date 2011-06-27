@@ -13,7 +13,7 @@ $message = '';
 
 if( isset($_POST['add_name']) )
 {
-	include($phpbb_root_path . 'includes/functions_validate.php');
+	include(INC_DIR .'functions_validate.php');
 
 	$disallowed_user = ( isset($_POST['disallowed_user']) ) ? trim($_POST['disallowed_user']) : trim($_GET['disallowed_user']);
 

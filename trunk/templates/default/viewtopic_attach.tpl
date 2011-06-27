@@ -258,22 +258,21 @@
 			<!-- IF AUTH_MOD -->
 			<div class="spacer_6"></div>
 			<script type="text/javascript">
-				ajax.mod_action = function(status) {
+				ajax.change_tor_status = function(status) {
 					ajax.exec({
-						action    : 'mod_action',
-						mode      : 'change_tor_status',
+						action    : 'change_tor_status',
 						attach_id : {postrow.attach.tor_reged.ATTACH_ID},
 						status    : status
 					});
 				};
-				ajax.callback.mod_action = function(data) {
+				ajax.callback.change_tor_status = function(data) {
 					$('#tor-'+ data.attach_id +'-status').html(data.status);
 				};
 			</script>
 
 				<span id="tor-{postrow.attach.tor_reged.ATTACH_ID}">{postrow.attach.tor_reged.TOR_STATUS_SELECT}</span>
 
-				[ <a href="#" onclick="ajax.mod_action($('#tor-{postrow.attach.tor_reged.ATTACH_ID} select').val()); return false;" class="med bold nowrap">Изменить</a> ]
+				[ <a href="#" onclick="ajax.change_tor_status($('#tor-{postrow.attach.tor_reged.ATTACH_ID} select').val()); return false;" class="med bold nowrap">Изменить</a> ]
 
 			<!-- ENDIF -->
 		</td>
@@ -293,10 +292,23 @@
 	<!-- END comment -->
 	<tr class="row3 tCenter">
 		<td colspan="3">
+		<script type="text/javascript">
+		ajax.callback.change_torrent = function(data) {
+		    if(data.title) alert(data.title);
+		    if(data.url) document.location.href = data.url;
+		};
+		</script>
 		<!-- IF TOR_CONTROLS -->
-		<form method="POST" action="{TOR_ACTION}">
-			<input type="hidden" name="id" value="{postrow.attach.tor_reged.ATTACH_ID}" />
-
+		<script type="text/javascript">
+		function change_torrents()
+		{
+			ajax.exec({
+				action    : 'change_torrent',
+				attach_id : {postrow.attach.tor_reged.ATTACH_ID},
+				type      : $('#tor-select-{postrow.attach.tor_reged.ATTACH_ID}').val(),
+			});
+		}
+		</script>
 			<select name="tor_action" id="tor-select-{postrow.attach.tor_reged.ATTACH_ID}" onchange="$('#tor-confirm-{postrow.attach.tor_reged.ATTACH_ID}').attr('checked', 0); $('#tor-submit-{postrow.attach.tor_reged.ATTACH_ID}').attr('disabled', 1)">
 				<option value="" selected="selected" class="select-action">&raquo; {L_SELECT_ACTION}</option>
 				<option value="del_torrent">{L_DELETE_TORRENT}</option>
@@ -315,11 +327,10 @@
 				<!-- ENDIF -->
 			</select>
 			<label>
-				<input name="confirm" id="tor-confirm-{postrow.attach.tor_reged.ATTACH_ID}" type="checkbox" value="1" onclick="if( $('#tor-select-{postrow.attach.tor_reged.ATTACH_ID}')[0].selectedIndex != 0 ){ $('#tor-submit-{postrow.attach.tor_reged.ATTACH_ID}').attr('disabled', !this.checked); } else { return false; }" />&nbsp;{L_CONFIRM}&nbsp;
+				<input name="confirm" id="tor-confirm-{postrow.attach.tor_reged.ATTACH_ID}" type="checkbox" value="1" onclick="if( $('#tor-select-{postrow.attach.tor_reged.ATTACH_ID}')[0].selectedIndex != 0 ){ $('#tor-submit-{postrow.attach.tor_reged.ATTACH_ID}').click(function(){ change_torrents(); }); $('#tor-submit-{postrow.attach.tor_reged.ATTACH_ID}').attr('disabled', !this.checked); } else { return false; }" />&nbsp;{L_CONFIRM}&nbsp;
 			</label>
-			<input name="" id="tor-submit-{postrow.attach.tor_reged.ATTACH_ID}" type="submit" value="{L_DO_SUBMIT}" class="liteoption" style="width: 110px;" disabled="disabled" />&nbsp;
+			<input name="" id="tor-submit-{postrow.attach.tor_reged.ATTACH_ID}" type="button" value="{L_DO_SUBMIT}" class="liteoption" style="width: 110px;" disabled="disabled" />&nbsp;
 
-		</form>
 		<!-- ELSEIF TOR_HELP_LINKS -->
 		{TOR_HELP_LINKS}
 		<!-- ELSE -->

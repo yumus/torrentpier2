@@ -521,8 +521,6 @@ if ($submit && !$errors)
 					$datastore->update('moderators');
 				}
 			}
-			rm_userdata_cache($pr_data['user_id']);
-			rm_topic_userdata($pr_data['user_id']);
 
 			$die_msg = ($adm_edit) ? "Профиль <b>{$pr_data['username']}</b> был успешно изменён" : 'Ваш профиль был успешно изменён';
 			bb_die($die_msg);

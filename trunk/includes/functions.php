@@ -2840,7 +2840,7 @@ function get_title_match_topics ($title_match_sql, $limit = 500, $forum_ids = ar
 		{
 			$sphinx->SetMatchMode(SPH_MATCH_PHRASE);
 		}
-		if ($result = $sphinx->Query($title_match_sql, 'topics2', $userdata['username'] .' ('. USER_IP .')'))
+		if ($result = $sphinx->Query($title_match_sql, 'topics', $userdata['username'] .' ('. USER_IP .')'))
 		{
 			if (!empty($result['matches']))
 			{

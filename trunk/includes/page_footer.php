@@ -4,8 +4,6 @@ if (!defined('BB_ROOT')) die(basename(__FILE__));
 
 global $bb_cfg, $userdata, $template, $DBS, $lang;
 
-$logged_in = !empty($userdata['session_logged_in']);
-
 if (!empty($template))
 {
 	$template->assign_vars(array(
@@ -28,8 +26,6 @@ flush();
 
 if ($show_dbg_info)
 {
-#	echo '</textarea></form></title></comment></a></div></span></ilayer></layer></iframe></noframes></style></noscript></table></script></applet></font>';
-
 	$gen_time = utime() - TIMESTART;
 	$gen_time_txt = sprintf('%.3f', $gen_time);
 	$gzip_text = (UA_GZIP_SUPPORTED) ? 'GZIP' : '<s>GZIP</s>';

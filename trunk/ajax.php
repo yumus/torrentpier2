@@ -23,6 +23,8 @@ switch ($ajax->action)
 
 	case 'view_torrent':
 	case 'mod_action':
+	case 'change_torrent':
+	case 'change_tor_status':
 		require(INC_DIR .'functions_torrent.php');
 	break;
 
@@ -49,6 +51,7 @@ class ajax_common
 	//   ACTION NAME             AJAX_AUTH
 		'edit_user_profile' => array('admin'),
 
+		'change_torrent'    => array('mod'),
 		'change_tor_status' => array('mod'),
 		'mod_action'        => array('mod'),
 
@@ -278,6 +281,11 @@ class ajax_common
 	function change_tor_status ()
 	{
 		require(AJAX_DIR .'change_tor_status.php');
+	}
+
+	function change_torrent ()
+	{
+		require(AJAX_DIR .'change_torrent.php');
 	}
 
 	function view_torrent ()

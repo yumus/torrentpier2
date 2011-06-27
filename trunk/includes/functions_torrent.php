@@ -586,7 +586,7 @@ function send_torrent_with_passkey ($filename)
 	}
 
 	// Delete all additional urls
-	if ($bb_cfg['bt_del_addit_ann_urls'])
+	if ($bb_cfg['bt_del_addit_ann_urls'] || $bb_cfg['bt_disable_dht'])
 	{
 		unset($tor['announce-list']);
 	}
@@ -594,7 +594,6 @@ function send_torrent_with_passkey ($filename)
 	{
 		$tor['announce-list'] = array_merge($tor['announce-list'], array(array($announce)));
 	}
-
 
 	// Add publisher & topic url
 	$publisher = $bb_cfg['bt_add_publisher'];

@@ -267,7 +267,7 @@ define('COOKIE_DBG', 'bb_dbg');                    // debug cookie name
 $bb_cfg['server_name'] = $_SERVER['SERVER_NAME'];  // The domain name from which this board runs
 $bb_cfg['server_port'] = $_SERVER['SERVER_PORT'];  // The port your server is running on
 $bb_cfg['script_path'] = '/forum/';                // The path where FORUM is located relative to the domain name
-$bb_cfg['sitename'] = 'TORRENTS.RU (see $bb_cfg[\'sitename\'] in config.php)';               // Name of your site
+$bb_cfg['sitename'] = 'TorrentPier II - Torrent Tracker';               // Name of your site
 
 // Server load
 $bb_cfg['max_srv_load']      = 0;                  // 0 - disable

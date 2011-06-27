@@ -578,6 +578,8 @@ require(INC_DIR .'sessions.php');
 require(INC_DIR .'template.php');
 require(INC_DIR .'db/mysql.php');
 
+define('SQL_LAYER', 'mysql');
+
 $bb_cfg = array_merge(bb_get_config(BB_CONFIG), $bb_cfg);
 
 $bb_cfg['cookie_name']      = $bb_cfg['cookie_prefix'];

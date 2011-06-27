@@ -81,11 +81,8 @@ $description   = ($comment) ? $comment : preg_replace("#.torrent$#i", '', $displ
 
 if ($tor_auth_reg || $tor_auth_del)
 {
-	$reg_href   = "torrent.php?mode=reg&amp;id=$attach_id&amp;sid="	. $userdata['session_id'];
-	$unreg_href = "torrent.php?mode=unreg&amp;id=$attach_id&amp;sid=". $userdata['session_id'];
-
-	$reg_tor_url   = '<a class="genmed" href="'.$reg_href.'">'  . $lang['BT_REG_ON_TRACKER']     .'</a>';
-	$unreg_tor_url = '<a class="genmed" href="'.$unreg_href.'">'. $lang['BT_UNREG_FROM_TRACKER'] .'</a>';
+	$reg_tor_url   = '<a class="genmed" href="#" onclick="ajax.exec({ action: \'change_torrent\', attach_id : '. $attach_id .', type: \'reg\'}); return false;">'. $lang['BT_REG_ON_TRACKER'] .'</a>';
+	$unreg_tor_url = '<a class="genmed" href="#" onclick="ajax.exec({ action: \'change_torrent\', attach_id : '. $attach_id .', type: \'unreg\'}); return false;">'. $lang['BT_UNREG_FROM_TRACKER'] .'</a>';
 
 	$tracker_link = ($tor_reged) ? $unreg_tor_url : $reg_tor_url;
 }

@@ -62,22 +62,22 @@ switch($type)
 	break;
 
 	case 'reg';
-		tracker_register($attach_id, 'request');
+		tracker_register($attach_id);
 		$url = (TOPIC_URL . $torrent['topic_id']);
 	break;
 
 	case 'unreg';
-	    tracker_unregister($attach_id, 'request');
+	    tracker_unregister($attach_id);
 	    $url = (TOPIC_URL . $torrent['topic_id']);
 	break;
 
 	case 'del_torrent';
-	    delete_torrent($attach_id, 'request');
+	    delete_torrent($attach_id);
 	    $url = make_url(TOPIC_URL . $torrent['topic_id']);
 	break;
 
 	case 'del_torrent_move_topic';
-	    delete_torrent($attach_id, 'request');
+	    delete_torrent($attach_id);
 		$url = make_url("modcp.php?t=$topic_id&mode=move&sid={$userdata['session_id']}");
 	break;}
 

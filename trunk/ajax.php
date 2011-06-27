@@ -23,8 +23,12 @@ switch ($ajax->action)
 
 	case 'view_torrent':
 	case 'mod_action':
-	case 'change_torrent':
 	case 'change_tor_status':
+		require(INC_DIR .'functions_torrent.php');
+	break;
+
+    case 'change_torrent':
+        require(BB_ROOT .'attach_mod/attachment_mod.php');
 		require(INC_DIR .'functions_torrent.php');
 	break;
 

@@ -78,7 +78,7 @@ switch($type)
 
 	case 'del_torrent_move_topic';
 	    delete_torrent($attach_id);
-		$url = make_url("modcp.php?t=$topic_id&mode=move&sid={$userdata['session_id']}");
+		$url = make_url("modcp.php?t={$torrent['topic_id']}&mode=move&sid={$userdata['session_id']}");
 	break;}
 
 

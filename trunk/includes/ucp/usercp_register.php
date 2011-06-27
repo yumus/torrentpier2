@@ -134,7 +134,7 @@ if ($submit)
 {
 	if ($need_captcha && !CAPTCHA()->verify_code())
 	{
-		$errors[] = 'Вы должны правильно ввести код подтверждения';
+		$errors[] = $lang['CONFIRM_CODE_WRONG'];
 	}
 }
 

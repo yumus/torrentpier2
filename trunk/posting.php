@@ -654,10 +654,6 @@ if( $refresh || isset($_POST['del_poll_option']) || $error_msg || ($submit && $t
 		));
 
 	}
-	else if ($error_msg)
-	{
-		$template->assign_vars(array('ERROR_MESSAGE' => join('<br />', $error_msg)));
-	}
 }
 else
 {
@@ -739,6 +735,13 @@ else
 			$username = ( $post_info['user_id'] == ANONYMOUS && !empty($post_info['post_username']) ) ? $post_info['post_username'] : '';
 		}
 	}
+}
+
+if ($error_msg)
+{
+	$template->assign_vars(array(
+		'ERROR_MESSAGE' => $error_msg,
+	));
 }
 
 if (IS_GUEST || ($mode == 'editpost' && $post_info['poster_id'] == ANONYMOUS))
@@ -878,6 +881,7 @@ $bbcode_status = ($bb_cfg['allow_bbcode']) ? $lang['BBCODE_IS_ON'] : $lang['BBCO
 
 $template->assign_vars(array(
 	'USERNAME' => @$username,
+	'CAPTCHA_HTML' => (IS_GUEST) ? CAPTCHA()->get_html() : '',
 	'SUBJECT' => $subject,
 	'MESSAGE' => $message,
 	'BBCODE_STATUS' => sprintf($bbcode_status, '<a href="'."faq.php?mode=bbcode".'" target="_phpbbcode">', '</a>'),

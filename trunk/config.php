@@ -463,6 +463,7 @@ $bb_cfg['spam_filter_file_path'] = ''; //BB_PATH .'/misc/spam_filter_words.txt';
 // Posting
 $bb_cfg['show_virtual_keyboard'] = true;
 $bb_cfg['prevent_multiposting']  = true;           // replace "reply" with "edit last msg" if user (not admin or mod) is last topic poster
+$bb_cfg['max_smilies']           = 10;             // Максимальное число смайлов в посте (0 - без ограничения)
 
 // Actions log
 $bb_cfg['log_days_keep'] = 90;
@@ -540,7 +541,7 @@ $bb_cfg['advert_html_path']            = $bb_cfg['html_path'] .'advert.html';  #
 
 // Captcha
 $bb_cfg['captcha']['name']     = 'torrentpier.me';
-$bb_cfg['captcha']['disabled'] = true;
+$bb_cfg['captcha']['disabled'] = false;
 $bb_cfg['captcha']['off_key']  = 'secret_key';
 $bb_cfg['captcha']['salt1']    = 'secret_key';
 $bb_cfg['captcha']['salt2']    = 'secret_key';

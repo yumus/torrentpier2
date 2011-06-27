@@ -1059,6 +1059,7 @@ if ($bb_cfg['show_quick_reply'])
 			'QUICK_REPLY'     => true,
 			'QR_POST_ACTION'  => "posting.php",
 			'QR_TOPIC_ID'     => $topic_id,
+			'CAPTCHA_HTML'    => (IS_GUEST) ? CAPTCHA()->get_html() : '',
 		));
 		if (!IS_GUEST)
 		{

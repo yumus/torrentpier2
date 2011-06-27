@@ -91,7 +91,7 @@
 		onclick  = "storeCaret(this);"
 		onkeyup  = "storeCaret(this);"
 	>{MESSAGE}</textarea>
-
+<div align="center">{CAPTCHA_HTML}</div>
 <div id="translit_opt" class="mrg_4" style="display: none;">
 	<table cellspacing="0" class="translit_expl borderless bCenter">
 	<tr>

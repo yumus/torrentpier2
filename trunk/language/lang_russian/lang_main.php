@@ -354,6 +354,7 @@ $lang['DELETE_POLL'] = 'Удалить опрос';
 
 $lang['DISABLE_BBCODE_POST'] = 'Отключить BBCode';
 $lang['DISABLE_SMILIES_POST'] = 'Отключить смайлики';
+$lang['MAX_SMILIES_PER_POST'] = 'Лимит в %s смайлов в сообщении привышен.';
 
 $lang['BBCODE_IS_ON'] = '%sBBCode%s <u>ВКЛЮЧЁН</u>';
 $lang['BBCODE_IS_OFF'] = '%sBBCode%s <u>ВЫКЛЮЧЕН</u>';
@@ -1188,7 +1189,7 @@ $lang['UNSET_GOLD_TORRENT'] = 'Снять золото';
 $lang['SET_SILVER_TORRENT'] = 'Сделать серебряным';
 $lang['UNSET_SILVER_TORRENT'] = 'Снять серебро';
 $lang['GOLD_STATUS'] = 'ЗОЛОТАЯ РАЗДАЧА! СКАЧАННОЕ НЕ ЗАСЧИТЫВАЕТСЯ!';
-$lang['SILVER_STATUS'] = 'СЕРЕБРЯНАЯ РАЗДАЧА! СКАЧАННОЕ ЗАСЧИТЫВАЕТСЯ ТОЛЬКО НАПОЛОВИНУ!'; 
+$lang['SILVER_STATUS'] = 'СЕРЕБРЯНАЯ РАЗДАЧА! СКАЧАННОЕ ЗАСЧИТЫВАЕТСЯ ТОЛЬКО НАПОЛОВИНУ!';
 // End - Gold/Silver releases
 
 $lang['SEARCH_IN_FORUMS'] = 'Искать в форумах';
@@ -1270,9 +1271,9 @@ $lang['VIEWING_USER_BT_PROFILE'] = 'Torrent-профиль пользовате�
 $lang['CUR_ACTIVE_DLS'] = 'Текущие активные torrent\'ы';
 $lang['VIEW_TORRENT_PROFILE'] = 'Torrent-профиль';
 
-$lang['PROFILE_UP_TOTAL'] = 'Всего отдано';	
+$lang['PROFILE_UP_TOTAL'] = 'Всего отдано';
 $lang['PROFILE_DOWN_TOTAL'] = 'Всего скачано';
-$lang['PROFILE_BONUS'] = 'Бонус';		
+$lang['PROFILE_BONUS'] = 'Бонус';
 $lang['PROFILE_RELEASED'] = 'Отдано на своих раздачах';
 $lang['PROFILE_RATIO'] = 'Рейтинг';
 $lang['PROFILE_MAX_SPEED'] = 'Скорость';

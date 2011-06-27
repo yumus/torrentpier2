@@ -91,7 +91,7 @@
 		onclick  = "storeCaret(this);"
 		onkeyup  = "storeCaret(this);"
 	>{MESSAGE}</textarea>
-<div align="center">{CAPTCHA_HTML}</div>
+
 <div id="translit_opt" class="mrg_4" style="display: none;">
 	<table cellspacing="0" class="translit_expl borderless bCenter">
 	<tr>
@@ -134,10 +134,39 @@
 	</table>
 </div>
 
-<div class="mrg_4 tCenter">
-	<input title="Alt+Enter" type="submit" name="preview" value="{L_PREVIEW}" />&nbsp;&nbsp;
-	<input title="Ctrl+Enter" type="submit" name="post" class="bold" value="{L_SUBMIT}" />
+<div class="mrg_4 tCenter hidden" id="post-buttons-block">
+	<div class="pad_4">{CAPTCHA_HTML}</div>
+	<input title="Alt+Enter" type="submit" name="preview" value="{L_PREVIEW}" id="post-preview-btn" onclick="$('#post-submit').remove();" />&nbsp;&nbsp;
+	<input title="Ctrl+Enter" type="submit" name="post" class="bold" value="{L_SUBMIT}" id="post-submit-btn" />
+    <input type="button" value="Быстрый предпросмотр" onclick="ajax.exec({ action: 'view_message', message: $('textarea.editor').val() });">
 </div>
+<div id="post-js-warn">Для отправки сообщений необходимo включить JavaScript</div>
+
+<script type="text/javascript">
+function dis_submit_btn ()
+{
+	$('#post-submit-btn').attr('disabled', 1);
+	//debounce('post-submit-btn', 3000);
+}
+
+function debounce (el_id, time_ms)
+{
+	var $el = $('#'+el_id);
+	if ( $el.attr('disabled') == false ) {
+		$el.attr('disabled', 1);
+		setTimeout(function(){ $el.attr('disabled', 0); }, time_ms);
+	}
+}
+
+$(document).ready(function(){
+	$('#post-submit-btn').click(function(event){
+		$('#post-submit-btn').after('<input id="post-submit" type="hidden" name="post" value="1" />');
+	});
+	$('#post-js-warn').hide();
+	$('#post-buttons-block').show();
+	$('#post-submit-btn').attr('disabled', 0);
+});
+</script>
 
 <script type="text/javascript">
 var bbcode = new BBCode(document.post.message);
@@ -171,3 +200,16 @@ bbcode.addTag("codeSize", function(e) { var v=e.value; e.selectedIndex=0; return
 bbcode.addTag("codeAlign", function(e) { var v=e.value; e.selectedIndex=0; return "align="+v }, "/align");
 </script>
 <!-- ENDIF -->
+
+<script type="text/javascript">
+ajax.callback.view_message = function(data){
+    $('#view_message').show();
+    $('.view-message').html(data.html);
+    initPostBBCode('.view-message');
+		var maxH   = screen.height - 490;
+	$('.view-message').css({ maxHeight: maxH });
+};
+</script>
+<style type="text/css">
+.view-message { border: 1px #A5AFB4 solid; padding: 4px; margin: 6px; overflow: auto; }
+</style>

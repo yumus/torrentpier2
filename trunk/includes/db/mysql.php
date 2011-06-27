@@ -860,7 +860,7 @@ class sql_db
 	*/
 	function log_slow_query ($log_file = 'sql_slow_bb')
 	{
-		if (!defined('IN_FIRST_SLOW_QUERY') && $GLOBALS['bb_cache']->get('dont_log_slow_query'))
+		if (!defined('IN_FIRST_SLOW_QUERY') && CACHE('bb_cache')->get('dont_log_slow_query'))
 		{
 			return;
 		}

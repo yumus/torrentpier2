@@ -500,8 +500,6 @@ if ( $mode == 'read' )
 		$private_message = ( $bb_cfg['allow_bbcode'] ) ? bbencode_second_pass($private_message, $bbcode_uid) : preg_replace('/\:[0-9a-z\:]+\]/si', ']', $private_message);
 	}
 
-	$private_message = make_clickable($private_message);
-
 	$orig_word = array();
 	$replacement_word = array();
 	obtain_word_list($orig_word, $replacement_word);
@@ -510,11 +508,6 @@ if ( $mode == 'read' )
 	{
 		$post_subject = preg_replace($orig_word, $replacement_word, $post_subject);
 		$private_message = preg_replace($orig_word, $replacement_word, $private_message);
-	}
-
-	if ( $bb_cfg['allow_smilies'] && $privmsg['privmsgs_enable_smilies'] )
-	{
-		$private_message = smilies_pass($private_message);
 	}
 
 	$private_message = str_replace("\n", '<br />', $private_message);
@@ -1054,10 +1047,7 @@ else if ( $submit || $refresh || $mode != '' )
 		{
 			if ( !$error )
 			{
-				$bbcode_uid = ($bbcode_on) ? make_bbcode_uid() : '';
-
-				$privmsg_message = prepare_message($_POST['message'], $bbcode_on, $smilies_on, $bbcode_uid);
-
+				$privmsg_message = bbcode2html($_POST['message']);
 			}
 		}
 		else
@@ -1149,7 +1139,7 @@ else if ( $submit || $refresh || $mode != '' )
 			$privmsg_sent_id = DB()->sql_nextid();
 
 			$sql = "INSERT INTO " . BB_PRIVMSGS_TEXT . " (privmsgs_text_id, privmsgs_bbcode_uid, privmsgs_text)
-				VALUES ($privmsg_sent_id, '" . $bbcode_uid . "', '" . str_replace("\'", "''", $privmsg_message) . "')";
+				VALUES ($privmsg_sent_id, '" . @$bbcode_uid . "', '" . str_replace("\'", "''", $privmsg_message) . "')";
 		}
 		else
 		{
@@ -1394,18 +1384,9 @@ else if ( $submit || $refresh || $mode != '' )
 		$replacement_word = array();
 		obtain_word_list($orig_word, $replacement_word);
 
-		$bbcode_uid = ($bbcode_on) ? make_bbcode_uid() : '';
-
-		$preview_message = stripslashes(prepare_message($privmsg_message, $bbcode_on, $smilies_on, $bbcode_uid));
+		$preview_message = stripslashes(bbcode2html($privmsg_message));
 		$privmsg_message = stripslashes(preg_replace($html_entities_match, $html_entities_replace, $privmsg_message));
 
-		//
-		// Finalise processing as per viewtopic
-		//
-		if ( $bbcode_on )
-		{
-			$preview_message = bbencode_second_pass($preview_message, $bbcode_uid);
-		}
 
 		if ( count($orig_word) )
 		{
@@ -1417,12 +1398,6 @@ else if ( $submit || $refresh || $mode != '' )
 			$preview_subject = $privmsg_subject;
 		}
 
-		if ( $smilies_on )
-		{
-			$preview_message = smilies_pass($preview_message);
-		}
-
-		$preview_message = make_clickable($preview_message);
 		$preview_message = str_replace("\n", '<br />', $preview_message);
 
 		$s_hidden_fields = '<input type="hidden" name="folder" value="' . $folder . '" />';

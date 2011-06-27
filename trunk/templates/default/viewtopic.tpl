@@ -315,7 +315,7 @@ function set_hid_chbox (id)
 </table><!--/pagination-->
 
 <!-- IF QUICK_REPLY -->
-<form action="{QR_POST_ACTION}" method="post" name="post" onsubmit="return checkForm(this);">
+<form action="{QR_POST_ACTION}" method="post" name="post" onsubmit="if(checkForm(this)){ dis_submit_btn(); }else{ return false; }">
 <input type="hidden" name="mode" value="reply" />
 <input type="hidden" name="t" value="{QR_TOPIC_ID}" />
 
@@ -325,7 +325,9 @@ function set_hid_chbox (id)
 </tr>
 <tr>
 	<td class="td2 row2 tCenter">
-
+		<div id="view_message" class="hidden">
+			<div class="tLeft view-message"></div>
+		</div>
 		<div class="quick_reply_box bCenter">
 			<!-- IF not LOGGED_IN -->
 			<p class="mrg_6"><b>{L_QR_USERNAME}: </b><input type="text" name="username" size="20" maxlength="25" /></p>

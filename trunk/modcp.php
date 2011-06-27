@@ -610,19 +610,7 @@ switch ($mode)
 					// If the board has HTML off but the post has HTML
 					// on then we process it, else leave it alone
 					//
-					if ( $bbcode_uid != '' )
-					{
-						$message = ( $bb_cfg['allow_bbcode'] ) ? bbencode_second_pass($message, $bbcode_uid) : preg_replace('/\:[0-9a-z\:]+\]/si', ']', $message);
-					}
-
-					$message = make_clickable($message);
-
-					if ( $bb_cfg['allow_smilies'] && $postrow[$i]['enable_smilies'] )
-					{
-						$message = smilies_pass($message);
-					}
-
-					$message = str_replace("\n", '<br />', $message);
+					$message =  bbcode2html($message);
 
 					$row_class = !($i % 2) ? 'row1' : 'row2';
 

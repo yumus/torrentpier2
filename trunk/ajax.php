@@ -17,6 +17,7 @@ if (file_exists(BB_DISABLED))
 switch ($ajax->action)
 {
 	case 'view_post':
+	case 'view_message':
 		require(INC_DIR .'bbcode.php');
 	break;
 
@@ -52,6 +53,7 @@ class ajax_common
 		'mod_action'        => array('mod'),
 
 		'view_post'         => array('guest'),
+		'view_message'      => array('guest'),
         'view_torrent'      => array('guest'),
         'user_register'     => array('guest'),
 	);
@@ -252,20 +254,25 @@ class ajax_common
 		}
 	}
 
-	/**
-	*  Edit user profile
-	*/
 	function edit_user_profile ()
 	{
         require(AJAX_DIR .'edit_user_profile.php');
 	}
 
-	/**
-	*  View post
-	*/
 	function view_post ()
 	{
 		require(AJAX_DIR .'view_post.php');
+	}
+
+	function view_message ()
+	{
+		global $lang;
+
+		$message = (string) $this->request['message'];
+		if(!trim($message)) $this->ajax_die($lang['EMPTY_MESSAGE']);
+		$message = bbcode2html(DB()->escape($message));
+        $message = str_replace('\n', '<div></div>', $message);
+		$this->response['html'] = $message;
 	}
 
 	function change_tor_status ()

@@ -243,12 +243,7 @@ class report_privmsg extends report_module
 			$message = preg_replace('#(<)([\/]?.*?)(>)#is', '&lt;\\2&gt;', $message);
 		}*/
 
-		if ($row['privmsgs_enable_bbcode'] && $row['privmsgs_bbcode_uid'] != '')
-		{
-			$message = ($bb_cfg['allow_bbcode']) ? bbencode_second_pass($message, $row['privmsgs_bbcode_uid']) : preg_replace('/\:[0-9a-z\:]+\]/si', ']', $message);
-		}
-
-		$message = make_clickable($message);
+		$message = bbcode2html($message);
 
 		$orig_word = $replacement_word = array();
 		obtain_word_list($orig_word, $replacement_word);
@@ -258,12 +253,5 @@ class report_privmsg extends report_module
 			$subject = preg_replace($orig_word, $replacement_word, $subject);
 			$message = preg_replace($orig_word, $replacement_word, $message);
 		}
-
-		if ($bb_cfg['allow_smilies'] && $row['privmsgs_enable_smilies'])
-		{
-			$message = smilies_pass($message);
-		}
-
-		$message = str_replace("\n", '<br />', $message);
 	}
 }

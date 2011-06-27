@@ -56,7 +56,7 @@
 	<!-- IF POSTING_TOPIC_ID --><em>&raquo;</em> <a class="normal" href="{TOPIC_URL}{POSTING_TOPIC_ID}">{POSTING_TOPIC_TITLE}</a><!-- ENDIF -->
 </p>
 
-<form action="{S_POST_ACTION}" method="post" name="post" onsubmit="return checkForm(this);" {S_FORM_ENCTYPE}>
+<form action="{S_POST_ACTION}" method="post" name="post" onsubmit="if(checkForm(this)){ dis_submit_btn(); }else{ return false; }" {S_FORM_ENCTYPE}>
 {S_HIDDEN_FORM_FIELDS}
 {ADD_ATTACH_HIDDEN_FIELDS}
 {POSTED_ATTACHMENTS_HIDDEN_FIELDS}
@@ -68,6 +68,11 @@
 <tbody class="pad_4">
 <tr>
 	<th colspan="2" class="thHead"><b>{POSTING_TYPE_TITLE}</b></th>
+</tr>
+<tr id="view_message" class="hidden">
+	<td colspan="2">
+	    <div class="view-message"></div>
+	</td>
 </tr>
 <!-- IF POSTING_USERNAME -->
 <tr>

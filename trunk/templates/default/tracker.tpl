@@ -285,9 +285,6 @@ ajax.callback.view_post = function(data) {
 	<th class="{sorter: 'text'}" title="{L_AUTHOR}"><b class="tbs-text">{L_AUTHOR}</b></th>
 	<!-- ENDIF -->
 	<th class="{sorter: 'digit'}" title="{L_SIZE}"><b class="tbs-text">{L_SIZE}</b></th>
-	<!-- IF MAGNET_LINKS -->
-	<th class="{sorter: false}" title="{L_MAGNET}"><b class="tbs-text">{L_MAGNET}</b></th>
-	<!-- ENDIF -->
 	<th class="{sorter: 'digit'}" title="{L_SEEDERS}"><b class="tbs-text">S</b></th>
 	<th class="{sorter: 'digit'}" title="{L_LEECHERS}"><b class="tbs-text">L</b></th>
 	<th class="{sorter: 'digit'}" title="{L_COMPLETED} / {L_REPLIES}"><b class="tbs-text">C</b></th>
@@ -300,15 +297,7 @@ ajax.callback.view_post = function(data) {
 <!-- BEGIN tor -->
 <tr class="tCenter" id="tor_{tor.POST_ID}">
 	<td class="row1"><!-- IF tor.USER_AUTHOR --><p style="padding-bottom: 3px">&nbsp;<b>&reg;</b>&nbsp;</p><!-- ELSEIF tor.IS_NEW -->{MINIPOST_IMG_NEW}<!-- ELSE -->{MINIPOST_IMG}<!-- ENDIF --></td>
-	<td class="row1"><!-- IF tor.TOR_STATUS == 0 --><b><span title="{L_TOR_STATUS_NOT_CHECKED}" style="color: purple;">*</span></b><!-- ENDIF -->
-			<!-- IF tor.TOR_STATUS == 1 --><b><span title="{L_TOR_STATUS_CLOSED}" style="color: red;">x</span></b><!-- ENDIF -->
-			<!-- IF tor.TOR_STATUS == 2 --><b><span title="{L_TOR_STATUS_CHECKED}" style="color: green;">&radic;</span></b><!-- ENDIF -->
-			<!-- IF tor.TOR_STATUS == 3 --><b><span title="{L_TOR_STATUS_D}" style="color: blue;">D</span></b><!-- ENDIF -->
-			<!-- IF tor.TOR_STATUS == 4 --><b><span title="{L_TOR_STATUS_NOT_PERFECT}" style="color: red;">!</span></b><!-- ENDIF -->	
-			<!-- IF tor.TOR_STATUS == 5 --><b><span title="{L_TOR_STATUS_PART_PERFECT}" style="color: red;">?</span></b><!-- ENDIF -->
-			<!-- IF tor.TOR_STATUS == 6 --><b><span title="{L_TOR_STATUS_FISHILY}" style="color:green;">#</span></b><!-- ENDIF -->
-			<!-- IF tor.TOR_STATUS == 7 --><b><span title="{L_TOR_STATUS_COPY}" style="color: red;">&copy;</span></b><!-- ENDIF -->
-	</td>
+	<td class="row1 tCenter" title="{tor.TOR_STATUS_TEXT}">{tor.TOR_STATUS_ICON}</td>
 	<!-- IF SHOW_CAT -->
 	<td class="row1"><a class="gen" href="{TR_CAT_URL}{tor.CAT_ID}">{tor.CAT_TITLE}</a></td>
 	<!-- ENDIF -->
@@ -320,15 +309,12 @@ ajax.callback.view_post = function(data) {
 	</td>
 	<!-- IF SHOW_AUTHOR -->
 	<td class="row1"><a class="med" href="{TR_POSTER_URL}{tor.POSTER_ID}">{tor.USERNAME}</a></td>
-	<!-- ENDIF -->	
+	<!-- ENDIF -->
 	<td class="row4 small nowrap">
 		<u>{tor.TOR_SIZE_RAW}</u>
-		<!-- IF not tor.TOR_FROZEN --><a class="small tr-dl" href="{DOWNLOAD_URL}{tor.ATTACH_ID}">{tor.TOR_SIZE}</a><!-- ELSE -->
+		<!-- IF not tor.TOR_FROZEN -->{tor.TOR_SIZE}<div class="spacer_2 hr1"></div><a class="small tr-dl" title="{L_DOWNLOAD}" href="{DOWNLOAD_URL}{tor.ATTACH_ID}"><img src="images/icon_dn.gif" width="12" height="12" border="0" /></a> <!-- IF MAGNET_LINKS --><span title="{L_MAGNET}">{tor.MAGNET}</span><!-- ENDIF --><!-- ELSE -->
 		{tor.TOR_SIZE}<!-- ENDIF -->
 	</td>
-	<!-- IF MAGNET_LINKS -->
-	<td class="row4 seedmed"><!-- IF tor.TOR_FROZEN -->[<span class="dlSp"> </span>x<span class="dlSp"> </span>]<!-- ELSE -->{tor.MAGNET}<!-- ENDIF --></td>
-	<!-- ENDIF -->
 	<td class="row4 seedmed" title="{tor.SEEDS_TITLE}"><b>{tor.SEEDS}</b></td>
 	<td class="row4 leechmed" title="{L_LEECHERS}"><b>{tor.LEECHS}</b></td>
 	<td class="row4 small" title="{L_REPLIES}: {tor.REPLIES}">{tor.COMPLETED}</td>

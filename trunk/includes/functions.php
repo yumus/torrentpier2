@@ -2921,7 +2921,7 @@ function create_magnet($infohash, $auth_key, $logged_in)
 {
 	global $bb_cfg, $userdata, $_GET;
 	$passkey_url = (!$logged_in || isset($_GET['no_passkey'])) ? '' : "?{$bb_cfg['passkey_key']}=$auth_key&";
-	return '<a href="magnet:?xt=urn:btih:'. bin2hex($infohash) .'&tr='. urlencode($bb_cfg['bt_announce_url'] . $passkey_url) .'"><img src="images/magnet.gif" width="12" height="12" border="0" /></a>';
+	return '<a href="magnet:?xt=urn:btih:'. bin2hex($infohash) .'&tr='. urlencode($bb_cfg['bt_announce_url'] . $passkey_url) .'"><img src="images/magnet.png" width="12" height="12" border="0" /></a>';
 }
 
 function get_avatar ($avatar, $type, $allowavatar = true)

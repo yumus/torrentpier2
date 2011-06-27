@@ -751,11 +751,10 @@ if ($allowed_forums)
 				'ATTACH_ID'    => $att_id,
 				'MAGNET'       => $tor_magnet,
 				'TOR_TYPE'     => $is_gold,
-				'TOR_FROZEN'   => ($tor['tor_status'] == TOR_STATUS_FROZEN || $tor['tor_status'] == 3 || $tor['tor_status'] == 4 || $tor['tor_status'] == 7),
 
-				// torrent status mod
-				'TOR_STATUS'   => ($tor['tor_status']),
-				//end torrent status mod
+				'TOR_FROZEN'   => isset($bb_cfg['tor_frozen'][$tor['tor_status']]),
+				'TOR_STATUS_ICON' => $bb_cfg['tor_icons'][$tor['tor_status']],
+				'TOR_STATUS_TEXT' => $lang['tor_status'][$tor['tor_status']],
 
 				'TOR_SIZE_RAW' => $size,
 				'TOR_SIZE'     => humn_size($size),

@@ -1,5 +1,5 @@
-#labels Featured
-#Мы переехали
+#labels Featured,Phase-Support
+= Мы переехали = 
 
 = Данный репозитарий является архивным, в связи с переходом на Git и переносом репозитария на Github соответственно. Для получения актуальной информации о разработке нашего проекта, пожалуйста, посетите нашу страницу на Github: [https://github.com/torrentpier https://github.com/torrentpier] =
 
